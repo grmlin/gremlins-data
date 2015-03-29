@@ -17,7 +17,7 @@ describe('gremlinjs-data', function () {
 			mixins: [gremlinsData],
 			name: 'data',
 			initialize() {
-				try {s
+				try {
 					expect(this.data).to.be.an('object');
 
 					expect(this.data).to.have.property('string');

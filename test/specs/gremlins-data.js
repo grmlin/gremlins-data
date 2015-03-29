@@ -81,7 +81,6 @@ describe("gremlinjs-data", function () {
 			name: "data",
 			initialize: function initialize() {
 				try {
-					s;
 					expect(this.data).to.be.an("object");
 
 					expect(this.data).to.have.property("string");
