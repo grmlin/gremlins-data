@@ -13,9 +13,8 @@ describe('gremlinjs-data', function () {
 			}
 		};
 
-		gremlins.create({
+		gremlins.create('data-gremlin', {
 			mixins: [gremlinsData],
-			name: 'data',
 			initialize() {
 				try {
 					expect(this.data).to.be.an('object');

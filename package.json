@@ -1,7 +1,7 @@
 {
   "name": "gremlins-data",
-  "version": "0.1.0",
-  "main": "dist/index.js",
+  "version": "0.2.0",
+  "main": "index.js",
   "author": {
     "name": "Andreas Wehr"
   },
@@ -12,12 +12,15 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "babelify": "^5.0.4",
-    "browserify": "^9.0.3",
-    "gremlins": "^0.8.1",
-    "gulp": "^3.8.11",
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.4",
+    "gremlins": "^0.9.0",
+    "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",
-    "gulp-rename": "^1.2.0",
-    "through2": "^0.6.3"
+    "gulp-rename": "^1.2.2",
+    "through2": "^2.0.0"
+  },
+  "browserify": {
+    "transform": ["babelify"]
   }
 }

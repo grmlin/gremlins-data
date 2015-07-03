@@ -35,9 +35,8 @@ download from `dist`
 var gremlins = require('gremlins'),
   data = require('gremlins-data');
   
-gremlins.create({
+gremlins.create('data-gremlin', {
     mixins: [data],
-    name: 'data',
     initialize() {
         console.log(data.string); // string foo
         console.log(data.number); // number 42
