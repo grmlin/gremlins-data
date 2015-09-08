@@ -24,7 +24,7 @@ gulp.task('scriptsTest', function () {
 });
 
 gulp.task('scripts', function () {
-	return gulp.src('index.js')
+	return gulp.src('./index.js')
 		.pipe(through2.obj(function (file, enc, next) {
 			browserify(file.path, {
 				standalone: 'gremlinsData',
@@ -55,7 +55,7 @@ gulp.task("reload", function () {
 });
 
 gulp.task('watch', function () {
-	gulp.watch(['index.js', 'test/src/*.*'], ['scriptsTest', 'reload']);
+	gulp.watch(['./index.js', './test/src/*.*'], ['scriptsTest', 'reload']);
 });
 
 gulp.task('default', ['connect', 'scriptsTest', 'watch']);
