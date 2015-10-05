@@ -52,7 +52,9 @@ gremlins.create('data-gremlin', {
         console.log(this.data.yes); // boolean true
         console.log(this.data.no); // boolean false
         console.log(this.data.object); // object {foo: 'bar', deep: {foo: 'bar'}}
-        
+    },
+    attributeDidChange(attributeName, previousValue, value){
+        console.log(attributeName + ' changed to it\'s value to', value);
     }
 });  
 ```
