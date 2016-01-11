@@ -1,6 +1,6 @@
 {
   "name": "gremlins-data",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "index.js",
   "author": {
     "name": "Andreas Wehr"
@@ -12,7 +12,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "babel-plugin-syntax-class-properties": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "gremlins": "^0.12.0",
