@@ -8,16 +8,6 @@ gremlin.js element data mixin.
 
     $ npm install gremlins-data
     
-### Bower
-    
-    $ bower install gremlins-data
-    
-### Classic
-
-download from `dist` 
-
-    <script src="gremlins-data.js" />
-
 ## Usage
 
 - all `data` attributes will be parsed into the `.data` object of the gremlin's instance.
@@ -33,14 +23,14 @@ download from `dist`
     data-number="42" 
     data-yes="true" 
     data-no="false" 
-    data-object='{"foo":"bar","deep":{"foo":"bar"}}' 
+    data-obj='{"foo":"bar","deep":{"foo":"bar"}}'
     data-with-long-name="foo">
 </data-gremlin>
 ```
 
 ```js
-var gremlins = require('gremlins'),
-  data = require('gremlins-data');
+const gremlins = require('gremlins');
+const data = require('gremlins-data');
   
 gremlins.create('data-gremlin', {
     mixins: [data],
@@ -51,7 +41,7 @@ gremlins.create('data-gremlin', {
         console.log(this.data.number); // number 42
         console.log(this.data.yes); // boolean true
         console.log(this.data.no); // boolean false
-        console.log(this.data.object); // object {foo: 'bar', deep: {foo: 'bar'}}
+        console.log(this.data.obj); // object {foo: 'bar', deep: {foo: 'bar'}}
     },
     attributeDidChange(attributeName, previousValue, value){
         console.log(attributeName + ' changed to it\'s value to', value);
