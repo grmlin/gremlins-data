@@ -4,6 +4,8 @@ gremlin.js element data mixin.
 
 ## Installation
 
+**requires `gremlins@1.1.x`**
+
 ### NPM
 
     $ npm install gremlins-data
