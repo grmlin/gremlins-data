@@ -13,7 +13,7 @@ gremlin.js element data mixin.
 - all `data` attributes will be parsed into the `.data` object of the gremlin's instance.
 - all other attributes can be found in the `.props` object of the gremlin's instance.
  
- Properties and data will be updated if they are changed in the dom, use the `attributeDidChange` callback if you need to update you component then.
+ Properties and data will be updated if they are changed in the dom, use the `attributeDidChange` callback if you need to update the component then.
 
 ```html
 <data-gremlin 
@@ -34,7 +34,7 @@ const data = require('gremlins-data');
   
 gremlins.create('data-gremlin', {
     mixins: [data],
-    initialize() {
+    attached() {
         console.log(this.props.id); // string foo
         console.log(this.props.name); // string Gizmo
         console.log(this.data.string); // string foo
