@@ -61,7 +61,7 @@ function parseAttrs(gremlin) {
 
 module.exports = {
     __didInitializeAttributes: false,
-    initialize() {
+    created() {
         parseAttrs(this);
         this.__didInitializeAttributes = true;
     },
