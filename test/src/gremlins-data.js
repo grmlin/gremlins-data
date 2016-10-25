@@ -15,7 +15,7 @@ describe('gremlinjs-data', function () {
 
 		gremlins.create('data-gremlin', {
 			mixins: [gremlinsData],
-			initialize() {
+			attached() {
 				try {
 					expect(this.data).to.be.an('object');
 
@@ -63,7 +63,7 @@ describe('gremlinjs-data', function () {
 
 		gremlins.create('data-gremlin-2', {
 			mixins: [gremlinsData],
-			initialize() {
+			attached() {
 				try {
 					expect(this.props).to.be.an('object');
 

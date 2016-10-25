@@ -59,7 +59,7 @@ function parseAttrs(gremlin) {
 
 module.exports = {
     __didInitializeAttributes: false,
-    initialize: function initialize() {
+    created: function created() {
         parseAttrs(this);
         this.__didInitializeAttributes = true;
     },
@@ -84,6 +84,7 @@ var uuid = require('./uuid');
 
 var exp = 'gremlins_' + uuid();
 var cache = {};
+var pendingSearches = [];
 
 var gremlinId = function gremlinId() {
   var id = 1;
@@ -111,6 +112,15 @@ module.exports = {
     } else {
         cache[id] = gremlin;
       }
+
+    pendingSearches = pendingSearches.filter(function (search) {
+      var wasSearchedFor = search.element === element;
+      if (wasSearchedFor) {
+        search.created(gremlin);
+      }
+
+      return !wasSearchedFor;
+    });
   },
   getGremlin: function getGremlin(element) {
     var id = getId(element);
@@ -120,6 +130,33 @@ module.exports = {
       // console.warn(`This dom element does not use any gremlins!`, element);
     }
     return gremlin === undefined ? null : gremlin;
+  },
+  getGremlinAsync: function getGremlinAsync(element) {
+    var _this = this;
+
+    var timeout = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+
+    return new Promise(function (resolve) {
+      var currentGremlin = _this.getGremlin(element);
+
+      if (currentGremlin !== null) {
+        resolve(currentGremlin);
+      } else {
+        (function () {
+          var gremlinNotFoundTimeout = timeout !== null ? setTimeout(function () {
+            resolve(null);
+          }, timeout) : null;
+
+          pendingSearches.push({
+            element: element,
+            created: function created(createdGremlin) {
+              clearTimeout(gremlinNotFoundTimeout);
+              resolve(createdGremlin);
+            }
+          });
+        })();
+      }
+    });
   }
 };
 },{"./uuid":11}],4:[function(require,module,exports){
@@ -181,8 +218,9 @@ var hasSpec = function hasSpec(tagName) {
 };
 
 var Gremlin = {
-  initialize: function initialize() {},
-  destroy: function destroy() {},
+  created: function created() {},
+  attached: function attached() {},
+  detached: function detached() {},
   create: function create(tagName) {
     var Spec = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
@@ -237,14 +275,38 @@ var styleSheet = undefined;
 document.head.appendChild(styleElement);
 styleSheet = styleElement.sheet;
 
-function addInstance(element, Spec) {
-  var gremlin = Factory.createInstance(element, Spec);
-  Data.addGremlin(gremlin, element);
-  gremlin.initialize();
+function createInstance(element, Spec) {
+  var existingGremlins = Data.getGremlin(element);
+
+  if (existingGremlins === null) {
+    var gremlin = Factory.createInstance(element, Spec);
+    Data.addGremlin(gremlin, element);
+
+    if (typeof gremlin.initialize === 'function') {
+      console.warn('<' + element.tagName + ' />\n' + 'the use of the `initialize` callback of a gremlin component is deprecated. ' + 'Use the `created` callback instead.');
+      gremlin.initialize();
+    } else {
+      gremlin.created();
+    }
+  } else {
+    // console.warn('exisiting gremlin found');
+  }
 }
 
-function removeInstance(element) {
-  Data.getGremlin(element).destroy();
+function attachInstance(element) {
+  var gremlin = Data.getGremlin(element);
+  gremlin.attached();
+}
+
+function detachInstance(element) {
+  var gremlin = Data.getGremlin(element);
+
+  if (typeof gremlin.destroy === 'function') {
+    console.warn('<' + element.tagName + ' />\n' + 'the use of the `destroy` callback of a gremlin component is deprecated. Use ' + 'the `detached` callback instead.');
+    gremlin.destroy();
+  } else {
+    gremlin.detached();
+  }
 }
 
 function updateAttr(element, name, previousValue, value) {
@@ -258,14 +320,19 @@ function updateAttr(element, name, previousValue, value) {
 module.exports = {
   register: function register(tagName, Spec) {
     var proto = {
+      createdCallback: {
+        value: function value() {
+          createInstance(this, Spec);
+        }
+      },
       attachedCallback: {
         value: function value() {
-          addInstance(this, Spec);
+          attachInstance(this);
         }
       },
       detachedCallback: {
         value: function value() {
-          removeInstance(this);
+          detachInstance(this);
         }
       },
       attributeChangedCallback: {
@@ -418,8 +485,8 @@ module.exports = {
    * @api public
    */
   create: Gremlin.create.bind(Gremlin),
-  findGremlin: function findGremlin(element) {
-    return Data.getGremlin(element);
+  findGremlin: function findGremlin(element, timeout) {
+    return Data.getGremlinAsync(element, timeout);
   }
 };
 },{"./Data":3,"./Gremlin":5,"./consoleShim":8}],10:[function(require,module,exports){
@@ -499,7 +566,7 @@ describe('gremlinjs-data', function () {
 
 		gremlins.create('data-gremlin', {
 			mixins: [gremlinsData],
-			initialize() {
+			attached() {
 				try {
 					expect(this.data).to.be.an('object');
 
@@ -547,7 +614,7 @@ describe('gremlinjs-data', function () {
 
 		gremlins.create('data-gremlin-2', {
 			mixins: [gremlinsData],
-			initialize() {
+			attached() {
 				try {
 					expect(this.props).to.be.an('object');
 
