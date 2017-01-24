@@ -37,7 +37,7 @@ function getValue(value) {
 }
 
 function parseAttrs(gremlin) {
-  var attributes = gremlin.attributes;
+  var attributes = gremlin.el.attributes;
   var dataHash = {};
   var propsHash = {};
 
@@ -73,15 +73,123 @@ module.exports = {
   }
 };
 },{}],2:[function(require,module,exports){
-/*! (C) WebReflection Mit Style License */
-(function(e,t,n,r){"use strict";function rt(e,t){for(var n=0,r=e.length;n<r;n++)vt(e[n],t)}function it(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],nt(r,b[ot(r)])}function st(e){return function(t){j(t)&&(vt(t,e),rt(t.querySelectorAll(w),e))}}function ot(e){var t=e.getAttribute("is"),n=e.nodeName.toUpperCase(),r=S.call(y,t?v+t.toUpperCase():d+n);return t&&-1<r&&!ut(n,t)?-1:r}function ut(e,t){return-1<w.indexOf(e+'[is="'+t+'"]')}function at(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;Q&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[a]?null:e.prevValue,n===e[l]?null:e.newValue)}function ft(e){var t=st(e);return function(e){X.push(t,e.target)}}function lt(e){K&&(K=!1,e.currentTarget.removeEventListener(h,lt)),rt((e.target||t).querySelectorAll(w),e.detail===o?o:s),B&&pt()}function ct(e,t){var n=this;q.call(n,e,t),G.call(n,{target:n})}function ht(e,t){D(e,t),et?et.observe(e,z):(J&&(e.setAttribute=ct,e[i]=Z(e),e.addEventListener(p,G)),e.addEventListener(c,at)),e.createdCallback&&Q&&(e.created=!0,e.createdCallback(),e.created=!1)}function pt(){for(var e,t=0,n=F.length;t<n;t++)e=F[t],E.contains(e)||(n--,F.splice(t--,1),vt(e,o))}function dt(e){throw new Error("A "+e+" type is already registered")}function vt(e,t){var n,r=ot(e);-1<r&&(tt(e,b[r]),r=0,t===s&&!e[s]?(e[o]=!1,e[s]=!0,r=1,B&&S.call(F,e)<0&&F.push(e)):t===o&&!e[o]&&(e[s]=!1,e[o]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}if(r in t)return;var i="__"+r+(Math.random()*1e5>>0),s="attached",o="detached",u="extends",a="ADDITION",f="MODIFICATION",l="REMOVAL",c="DOMAttrModified",h="DOMContentLoaded",p="DOMSubtreeModified",d="<",v="=",m=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,g=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],y=[],b=[],w="",E=t.documentElement,S=y.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},x=n.prototype,T=x.hasOwnProperty,N=x.isPrototypeOf,C=n.defineProperty,k=n.getOwnPropertyDescriptor,L=n.getOwnPropertyNames,A=n.getPrototypeOf,O=n.setPrototypeOf,M=!!n.__proto__,_=n.create||function mt(e){return e?(mt.prototype=e,new mt):this},D=O||(M?function(e,t){return e.__proto__=t,e}:L&&k?function(){function e(e,t){for(var n,r=L(t),i=0,s=r.length;i<s;i++)n=r[i],T.call(e,n)||C(e,n,k(t,n))}return function(t,n){do e(t,n);while((n=A(n))&&!N.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),P=e.MutationObserver||e.WebKitMutationObserver,H=(e.HTMLElement||e.Element||e.Node).prototype,B=!N.call(H,E),j=B?function(e){return e.nodeType===1}:function(e){return N.call(H,e)},F=B&&[],I=H.cloneNode,q=H.setAttribute,R=H.removeAttribute,U=t.createElement,z=P&&{attributes:!0,characterData:!0,attributeOldValue:!0},W=P||function(e){J=!1,E.removeEventListener(c,W)},X,V=e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,10)},$=!1,J=!0,K=!0,Q=!0,G,Y,Z,et,tt,nt;O||M?(tt=function(e,t){N.call(t,e)||ht(e,t)},nt=ht):(tt=function(e,t){e[i]||(e[i]=n(!0),ht(e,t))},nt=tt),B?(J=!1,function(){var e=k(H,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(c,{bubbles:!0});t.attrName=e,t.prevValue=this.getAttribute(e),t.newValue=null,t[l]=t.attrChange=2,R.call(this,e),this.dispatchEvent(t)},r=function(e,t){var n=this.hasAttribute(e),r=n&&this.getAttribute(e),i=new CustomEvent(c,{bubbles:!0});q.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[f]=i.attrChange=1:i[a]=i.attrChange=0,this.dispatchEvent(i)},s=function(e){var t=e.currentTarget,n=t[i],r=e.propertyName,s;n.hasOwnProperty(r)&&(n=n[r],s=new CustomEvent(c,{bubbles:!0}),s.attrName=n.name,s.prevValue=n.value||null,s.newValue=n.value=t[r]||null,s.prevValue==null?s[a]=s.attrChange=0:s[f]=s.attrChange=1,t.dispatchEvent(s))};e.value=function(e,o,u){e===c&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[i]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",s)),t.call(this,e,o,u)},C(H,"addEventListener",e)}()):P||(E.addEventListener(c,W),E.setAttribute(i,1),E.removeAttribute(i),J&&(G=function(e){var t=this,n,r,s;if(t===e.target){n=t[i],t[i]=r=Z(t);for(s in r){if(!(s in n))return Y(0,t,s,n[s],r[s],a);if(r[s]!==n[s])return Y(1,t,s,n[s],r[s],f)}for(s in n)if(!(s in r))return Y(2,t,s,n[s],r[s],l)}},Y=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,at(o)},Z=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),$||($=!0,P?(et=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new P(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,Q&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=s.getAttribute(i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(st(s),st(o)),et.observe(t,{childList:!0,subtree:!0})):(X=[],V(function E(){while(X.length)X.shift().call(null,X.shift());V(E)}),t.addEventListener("DOMNodeInserted",ft(s)),t.addEventListener("DOMNodeRemoved",ft(o))),t.addEventListener(h,lt),t.addEventListener("readystatechange",lt),t.createElement=function(e,n){var r=U.apply(t,arguments),i=""+e,s=S.call(y,(n?v:d)+(n||i).toUpperCase()),o=-1<s;return n&&(r.setAttribute("is",n=n.toLowerCase()),o&&(o=ut(i.toUpperCase(),n))),Q=!t.createElement.innerHTMLHelper,o&&nt(r,b[s]),r},H.cloneNode=function(e){var t=I.call(this,!!e),n=ot(t);return-1<n&&nt(t,b[n]),e&&it(t.querySelectorAll(w)),t}),-2<S.call(y,v+c)+S.call(y,d+c)&&dt(n);if(!m.test(c)||-1<S.call(g,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},a=r||x,f=T.call(a,u),l=f?r[u].toUpperCase():c,c,p;return f&&-1<S.call(y,d+l)&&dt(l),p=y.push((f?v:d)+c)-1,w=w.concat(w.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=b[p]=T.call(a,"prototype")?a.prototype:_(H),rt(t.querySelectorAll(w),s),i}})(window,document,Object,"registerElement");
-},{}],3:[function(require,module,exports){
+'use strict';
+
+var gremlins = require('gremlins'),
+  gremlinsData = require('../../lib/index');
+
+describe('gremlinjs-data', function () {
+
+  it('it reads data attributes', function (done) {
+    var complex = {
+      foo: 'bar',
+      deep: {
+        foo: 'bar'
+      }
+    };
+
+    gremlins.create('data-gremlin', {
+      mixins: [ gremlinsData ],
+      attached() {
+        try {
+          expect(this.data).to.be.an('object');
+
+          expect(this.data).to.have.property('string');
+          expect(this.data.string).to.be('foo');
+
+          expect(this.data).to.have.property('number');
+          expect(this.data.number).to.be(42);
+
+          expect(this.data).to.have.property('yes');
+          expect(this.data.yes).to.be.ok();
+
+          expect(this.data).to.have.property('no');
+          expect(this.data.no).not.to.be.ok();
+
+          expect(this.data).to.have.property('obj');
+          expect(this.data.obj).to.eql(complex);
+
+          expect(this.data).to.have.property('withLongName');
+          expect(this.data.withLongName).to.be('foo');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }
+    });
+
+    var container = document.createElement('div');
+    container.innerHTML = `
+		<data-gremlin
+			data-string="foo"
+			data-number="42"
+			data-yes="true"
+			data-no="false"
+			data-obj='${JSON.stringify(complex)}'
+			data-with-long-name="foo"
+		>
+		</data-gremlin>
+		`;
+    document.body.appendChild(container);
+  });
+
+  it('it reads normal attributes', function (done) {
+    var complex = {
+      foo: 'bar',
+      deep: {
+        foo: 'bar'
+      }
+    };
+
+    gremlins.create('data-gremlin-2', {
+      mixins: [ gremlinsData ],
+      attached() {
+        try {
+          expect(this.props).to.be.an('object');
+
+          expect(this.props).to.have.property('string');
+          expect(this.props.string).to.be('foo');
+
+          expect(this.props).to.have.property('number');
+          expect(this.props.number).to.be(42);
+
+          expect(this.props).to.have.property('yes');
+          expect(this.props.yes).to.be.ok();
+
+          expect(this.props).to.have.property('no');
+          expect(this.props.no).not.to.be.ok();
+
+          expect(this.props).to.have.property('obj');
+          expect(this.props.obj).to.eql(complex);
+
+          expect(this.props).to.have.property('withLongName');
+          expect(this.props.withLongName).to.be('foo');
+          done();
+        } catch (e) {
+          done(e);
+        }
+      }
+    });
+
+    var el = document.createElement('data-gremlin-2');
+    el.setAttribute('string', 'foo');
+    el.setAttribute('number', '42');
+    el.setAttribute('yes', 'true');
+    el.setAttribute('no', 'false');
+    el.setAttribute('obj', JSON.stringify(complex));
+    el.setAttribute('with-long-name', 'foo');
+    document.body.appendChild(el);
+  })
+
+});
+
+},{"../../lib/index":1,"gremlins":9}],3:[function(require,module,exports){
 "use strict";
 
 var pendingSearches = [];
 
-var hasId = function hasId(element) {
-  return element._gid !== undefined;
+var hasComponent = function hasComponent(element) {
+  return element.__gremlinInstance__ !== undefined;
 };
 
 module.exports = {
@@ -99,9 +207,9 @@ module.exports = {
     var timeout = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
     return new Promise(function (_resolve) {
-      if (hasId(element)) {
+      if (hasComponent(element)) {
         setTimeout(function () {
-          return _resolve(element);
+          return _resolve(element.__gremlinInstance__);
         }, 10);
       } else {
         (function () {
@@ -113,7 +221,7 @@ module.exports = {
             element: element,
             resolve: function resolve() {
               clearTimeout(gremlinNotFoundTimeout);
-              _resolve(element);
+              _resolve(element.__gremlinInstance__);
             }
           });
         })();
@@ -170,6 +278,7 @@ var Gremlin = {
   created: function created() {},
   attached: function attached() {},
   detached: function detached() {},
+  attributeDidChange: function attributeDidChange() {},
   create: function create(tagName) {
     var Spec = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
@@ -201,8 +310,7 @@ var Gremlin = {
     // and create the custom element for it
     GremlinElement.register(tagName, NewSpec);
     return NewSpec;
-  },
-  attributeDidChange: function attributeDidChange() {}
+  }
 };
 
 module.exports = Gremlin;
@@ -213,14 +321,14 @@ var Data = require('./Data');
 var uuid = require('./uuid');
 
 var canRegisterElements = typeof document.registerElement === 'function';
+var gremlinId = function gremlinId() {
+  return 'gremlins_' + uuid();
+};
 
 if (!canRegisterElements) {
   throw new Error('registerElement not available. Did you include the polyfill for older browsers?');
 }
 
-var gremlinId = function gremlinId() {
-  return 'gremlins_' + uuid();
-};
 var styleElement = document.createElement('style');
 var styleSheet = undefined;
 
@@ -229,53 +337,50 @@ styleSheet = styleElement.sheet;
 
 module.exports = {
   register: function register(tagName, Spec) {
-    // TODO test for reserved function names ['createdCallback', 'attachedCallback', '']
-
     var proto = {
       createdCallback: {
         value: function value() {
-          this._gid = gremlinId();
-
-          Data.addGremlin(this._gid);
-          this.created();
-        },
-
-        writable: false
+          var id = gremlinId();
+          this._gid = id;
+          this.__gremlinInstance__ = Object.create(Spec, {
+            _gid: {
+              value: id,
+              writable: false
+            },
+            el: {
+              value: this,
+              writable: false
+            }
+          });
+          Data.addGremlin(id);
+          this.__gremlinInstance__.created();
+        }
       },
       attachedCallback: {
         value: function value() {
-          this.attached();
+          this.__gremlinInstance__.attached();
         }
       },
       detachedCallback: {
         value: function value() {
-          this.detached();
+          this.__gremlinInstance__.detached();
         }
       },
       attributeChangedCallback: {
         value: function value(name, previousValue, _value) {
-          this.attributeDidChange(name, previousValue, _value);
+          this.__gremlinInstance__.attributeDidChange(name, previousValue, _value);
         }
       }
     };
-
-    for (var key in Spec) {
-      // eslint-disable-line guard-for-in
-      proto[key] = {
-        value: Spec[key]
-      };
-    }
 
     // insert the rule BEFORE registering the element. This is important because they may be inline
     // otherwise when first initialized.
     styleSheet.insertRule(tagName + ' { display: block }', 0);
 
-    var El = document.registerElement(tagName, {
+    return document.registerElement(tagName, {
       name: tagName,
       prototype: Object.create(HTMLElement.prototype, proto)
     });
-
-    return El;
   }
 };
 },{"./Data":3,"./uuid":10}],6:[function(require,module,exports){
@@ -285,23 +390,23 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var objectAssign = require('object-assign');
 
-function getMixins(gremlin) {
-  if (Array.isArray(gremlin.mixins)) {
-    return gremlin.mixins;
+function getMixins(Spec) {
+  if (Array.isArray(Spec.mixins)) {
+    return Spec.mixins;
   }
 
-  return gremlin.mixins ? [gremlin.mixins] : [];
+  return Spec.mixins ? [Spec.mixins] : [];
 }
 
-function decorateProperty(gremlin, propertyName, property) {
-  var gremlinProperty = gremlin[propertyName];
+function decorateProperty(Spec, propertyName, property) {
+  var gremlinProperty = Spec[propertyName];
   var moduleProperty = property;
   var gremlinPropertyType = typeof gremlinProperty === 'undefined' ? 'undefined' : _typeof(gremlinProperty);
   var modulePropertyType = typeof moduleProperty === 'undefined' ? 'undefined' : _typeof(moduleProperty);
   var isSamePropType = gremlinPropertyType === modulePropertyType;
 
   if (isSamePropType && modulePropertyType === 'function') {
-    gremlin[propertyName] = function () {
+    Spec[propertyName] = function () {
       // eslint-disable-line no-param-reassign, func-names
       // call the module first
       var moduleResult = moduleProperty.apply(this, arguments);
@@ -315,33 +420,33 @@ function decorateProperty(gremlin, propertyName, property) {
     };
   } else {
     console.warn( // eslint-disable-line no-console
-    'Can\'t decorate gremlin property ' + ('<' + gremlin.tagName + ' />#' + propertyName + ':' + gremlinPropertyType + '« ') + ('with »Module#' + propertyName + ':' + modulePropertyType + '«. Only functions can be decorated!'));
+    'Can\'t decorate gremlin property ' + ('<' + Spec.tagName + ' />#' + propertyName + ':' + gremlinPropertyType + '« ') + ('with »Module#' + propertyName + ':' + modulePropertyType + '«. Only functions can be decorated!'));
   }
 }
 
-function mixinModule(gremlin, Module) {
+function mixinModule(Spec, Module) {
   Object.keys(Module).forEach(function (propertyName) {
     var property = Module[propertyName];
 
-    if (gremlin[propertyName] === undefined) {
+    if (Spec[propertyName] === undefined) {
       var descriptor = Object.getOwnPropertyDescriptor(Module, propertyName);
-      Object.defineProperty(gremlin, propertyName, descriptor);
+      Object.defineProperty(Spec, propertyName, descriptor);
     } else {
-      decorateProperty(gremlin, propertyName, property);
+      decorateProperty(Spec, propertyName, property);
     }
   });
 }
 
 module.exports = {
-  mixinProps: function mixinProps(gremlin) {
-    var modules = getMixins(gremlin);
+  mixinProps: function mixinProps(Spec) {
+    var modules = getMixins(Spec);
     // reverse the modules array to call decorated functions in the right order
     modules.reverse().forEach(function (Module) {
-      return mixinModule(gremlin, Module);
+      return mixinModule(Spec, Module);
     });
   }
 };
-},{"object-assign":11}],7:[function(require,module,exports){
+},{"object-assign":12}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -424,7 +529,7 @@ module.exports = {
 require('document-register-element');
 
 module.exports = require('./gremlins');
-},{"./gremlins":8,"document-register-element":2}],10:[function(require,module,exports){
+},{"./gremlins":8,"document-register-element":11}],10:[function(require,module,exports){
 "use strict";
 
 // see https://gist.github.com/jed/982883
@@ -432,6 +537,9 @@ module.exports = function b(a) {
   return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, b); // eslint-disable-line max-len
 };
 },{}],11:[function(require,module,exports){
+/*! (C) WebReflection Mit Style License */
+(function(e,t,n,r){"use strict";function rt(e,t){for(var n=0,r=e.length;n<r;n++)vt(e[n],t)}function it(e){for(var t=0,n=e.length,r;t<n;t++)r=e[t],nt(r,b[ot(r)])}function st(e){return function(t){j(t)&&(vt(t,e),rt(t.querySelectorAll(w),e))}}function ot(e){var t=e.getAttribute("is"),n=e.nodeName.toUpperCase(),r=S.call(y,t?v+t.toUpperCase():d+n);return t&&-1<r&&!ut(n,t)?-1:r}function ut(e,t){return-1<w.indexOf(e+'[is="'+t+'"]')}function at(e){var t=e.currentTarget,n=e.attrChange,r=e.attrName,i=e.target;Q&&(!i||i===t)&&t.attributeChangedCallback&&r!=="style"&&e.prevValue!==e.newValue&&t.attributeChangedCallback(r,n===e[a]?null:e.prevValue,n===e[l]?null:e.newValue)}function ft(e){var t=st(e);return function(e){X.push(t,e.target)}}function lt(e){K&&(K=!1,e.currentTarget.removeEventListener(h,lt)),rt((e.target||t).querySelectorAll(w),e.detail===o?o:s),B&&pt()}function ct(e,t){var n=this;q.call(n,e,t),G.call(n,{target:n})}function ht(e,t){D(e,t),et?et.observe(e,z):(J&&(e.setAttribute=ct,e[i]=Z(e),e.addEventListener(p,G)),e.addEventListener(c,at)),e.createdCallback&&Q&&(e.created=!0,e.createdCallback(),e.created=!1)}function pt(){for(var e,t=0,n=F.length;t<n;t++)e=F[t],E.contains(e)||(n--,F.splice(t--,1),vt(e,o))}function dt(e){throw new Error("A "+e+" type is already registered")}function vt(e,t){var n,r=ot(e);-1<r&&(tt(e,b[r]),r=0,t===s&&!e[s]?(e[o]=!1,e[s]=!0,r=1,B&&S.call(F,e)<0&&F.push(e)):t===o&&!e[o]&&(e[s]=!1,e[o]=!0,r=1),r&&(n=e[t+"Callback"])&&n.call(e))}if(r in t)return;var i="__"+r+(Math.random()*1e5>>0),s="attached",o="detached",u="extends",a="ADDITION",f="MODIFICATION",l="REMOVAL",c="DOMAttrModified",h="DOMContentLoaded",p="DOMSubtreeModified",d="<",v="=",m=/^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/,g=["ANNOTATION-XML","COLOR-PROFILE","FONT-FACE","FONT-FACE-SRC","FONT-FACE-URI","FONT-FACE-FORMAT","FONT-FACE-NAME","MISSING-GLYPH"],y=[],b=[],w="",E=t.documentElement,S=y.indexOf||function(e){for(var t=this.length;t--&&this[t]!==e;);return t},x=n.prototype,T=x.hasOwnProperty,N=x.isPrototypeOf,C=n.defineProperty,k=n.getOwnPropertyDescriptor,L=n.getOwnPropertyNames,A=n.getPrototypeOf,O=n.setPrototypeOf,M=!!n.__proto__,_=n.create||function mt(e){return e?(mt.prototype=e,new mt):this},D=O||(M?function(e,t){return e.__proto__=t,e}:L&&k?function(){function e(e,t){for(var n,r=L(t),i=0,s=r.length;i<s;i++)n=r[i],T.call(e,n)||C(e,n,k(t,n))}return function(t,n){do e(t,n);while((n=A(n))&&!N.call(n,t));return t}}():function(e,t){for(var n in t)e[n]=t[n];return e}),P=e.MutationObserver||e.WebKitMutationObserver,H=(e.HTMLElement||e.Element||e.Node).prototype,B=!N.call(H,E),j=B?function(e){return e.nodeType===1}:function(e){return N.call(H,e)},F=B&&[],I=H.cloneNode,q=H.setAttribute,R=H.removeAttribute,U=t.createElement,z=P&&{attributes:!0,characterData:!0,attributeOldValue:!0},W=P||function(e){J=!1,E.removeEventListener(c,W)},X,V=e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,10)},$=!1,J=!0,K=!0,Q=!0,G,Y,Z,et,tt,nt;O||M?(tt=function(e,t){N.call(t,e)||ht(e,t)},nt=ht):(tt=function(e,t){e[i]||(e[i]=n(!0),ht(e,t))},nt=tt),B?(J=!1,function(){var e=k(H,"addEventListener"),t=e.value,n=function(e){var t=new CustomEvent(c,{bubbles:!0});t.attrName=e,t.prevValue=this.getAttribute(e),t.newValue=null,t[l]=t.attrChange=2,R.call(this,e),this.dispatchEvent(t)},r=function(e,t){var n=this.hasAttribute(e),r=n&&this.getAttribute(e),i=new CustomEvent(c,{bubbles:!0});q.call(this,e,t),i.attrName=e,i.prevValue=n?r:null,i.newValue=t,n?i[f]=i.attrChange=1:i[a]=i.attrChange=0,this.dispatchEvent(i)},s=function(e){var t=e.currentTarget,n=t[i],r=e.propertyName,s;n.hasOwnProperty(r)&&(n=n[r],s=new CustomEvent(c,{bubbles:!0}),s.attrName=n.name,s.prevValue=n.value||null,s.newValue=n.value=t[r]||null,s.prevValue==null?s[a]=s.attrChange=0:s[f]=s.attrChange=1,t.dispatchEvent(s))};e.value=function(e,o,u){e===c&&this.attributeChangedCallback&&this.setAttribute!==r&&(this[i]={className:{name:"class",value:this.className}},this.setAttribute=r,this.removeAttribute=n,t.call(this,"propertychange",s)),t.call(this,e,o,u)},C(H,"addEventListener",e)}()):P||(E.addEventListener(c,W),E.setAttribute(i,1),E.removeAttribute(i),J&&(G=function(e){var t=this,n,r,s;if(t===e.target){n=t[i],t[i]=r=Z(t);for(s in r){if(!(s in n))return Y(0,t,s,n[s],r[s],a);if(r[s]!==n[s])return Y(1,t,s,n[s],r[s],f)}for(s in n)if(!(s in r))return Y(2,t,s,n[s],r[s],l)}},Y=function(e,t,n,r,i,s){var o={attrChange:e,currentTarget:t,attrName:n,prevValue:r,newValue:i};o[s]=e,at(o)},Z=function(e){for(var t,n,r={},i=e.attributes,s=0,o=i.length;s<o;s++)t=i[s],n=t.name,n!=="setAttribute"&&(r[n]=t.value);return r})),t[r]=function(n,r){c=n.toUpperCase(),$||($=!0,P?(et=function(e,t){function n(e,t){for(var n=0,r=e.length;n<r;t(e[n++]));}return new P(function(r){for(var i,s,o,u=0,a=r.length;u<a;u++)i=r[u],i.type==="childList"?(n(i.addedNodes,e),n(i.removedNodes,t)):(s=i.target,Q&&s.attributeChangedCallback&&i.attributeName!=="style"&&(o=s.getAttribute(i.attributeName),o!==i.oldValue&&s.attributeChangedCallback(i.attributeName,i.oldValue,o)))})}(st(s),st(o)),et.observe(t,{childList:!0,subtree:!0})):(X=[],V(function E(){while(X.length)X.shift().call(null,X.shift());V(E)}),t.addEventListener("DOMNodeInserted",ft(s)),t.addEventListener("DOMNodeRemoved",ft(o))),t.addEventListener(h,lt),t.addEventListener("readystatechange",lt),t.createElement=function(e,n){var r=U.apply(t,arguments),i=""+e,s=S.call(y,(n?v:d)+(n||i).toUpperCase()),o=-1<s;return n&&(r.setAttribute("is",n=n.toLowerCase()),o&&(o=ut(i.toUpperCase(),n))),Q=!t.createElement.innerHTMLHelper,o&&nt(r,b[s]),r},H.cloneNode=function(e){var t=I.call(this,!!e),n=ot(t);return-1<n&&nt(t,b[n]),e&&it(t.querySelectorAll(w)),t}),-2<S.call(y,v+c)+S.call(y,d+c)&&dt(n);if(!m.test(c)||-1<S.call(g,c))throw new Error("The type "+n+" is invalid");var i=function(){return f?t.createElement(l,c):t.createElement(l)},a=r||x,f=T.call(a,u),l=f?r[u].toUpperCase():c,c,p;return f&&-1<S.call(y,d+l)&&dt(l),p=y.push((f?v:d)+c)-1,w=w.concat(w.length?",":"",f?l+'[is="'+n.toLowerCase()+'"]':l),i.prototype=b[p]=T.call(a,"prototype")?a.prototype:_(H),rt(t.querySelectorAll(w),s),i}})(window,document,Object,"registerElement");
+},{}],12:[function(require,module,exports){
 /* eslint-disable no-unused-vars */
 'use strict';
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -472,110 +580,4 @@ module.exports = Object.assign || function (target, source) {
 	return to;
 };
 
-},{}],12:[function(require,module,exports){
-'use strict';
-
-var gremlins = require('gremlins'),
-	gremlinsData = require('../../lib/index');
-
-describe('gremlinjs-data', function () {
-
-	it('it reads data attributes', function (done) {
-		var complex = {
-			foo: 'bar',
-			deep: {
-				foo: 'bar'
-			}
-		};
-
-		gremlins.create('data-gremlin', {
-			mixins: [gremlinsData],
-			attached() {
-				try {
-					expect(this.data).to.be.an('object');
-
-					expect(this.data).to.have.property('string');
-					expect(this.data.string).to.be('foo');
-
-					expect(this.data).to.have.property('number');
-					expect(this.data.number).to.be(42);
-
-					expect(this.data).to.have.property('yes');
-					expect(this.data.yes).to.be.ok();
-
-					expect(this.data).to.have.property('no');
-					expect(this.data.no).not.to.be.ok();
-
-					expect(this.data).to.have.property('obj');
-					expect(this.data.obj).to.eql(complex);
-
-					expect(this.data).to.have.property('withLongName');
-					expect(this.data.withLongName).to.be('foo');
-					done();
-				} catch (e) {
-					done(e);
-				}
-			}
-		});
-
-		var el = document.createElement('data-gremlin');
-		el.setAttribute('data-string', 'foo');
-		el.setAttribute('data-number', '42');
-		el.setAttribute('data-yes', 'true');
-		el.setAttribute('data-no', 'false');
-		el.setAttribute('data-obj', JSON.stringify(complex));
-		el.setAttribute('data-with-long-name', 'foo');
-		document.body.appendChild(el);
-	});
-
-	it('it reads normal attributes', function (done) {
-		var complex = {
-			foo: 'bar',
-			deep: {
-				foo: 'bar'
-			}
-		};
-
-		gremlins.create('data-gremlin-2', {
-			mixins: [gremlinsData],
-			attached() {
-				try {
-					expect(this.props).to.be.an('object');
-
-					expect(this.props).to.have.property('string');
-					expect(this.props.string).to.be('foo');
-
-					expect(this.props).to.have.property('number');
-					expect(this.props.number).to.be(42);
-
-					expect(this.props).to.have.property('yes');
-					expect(this.props.yes).to.be.ok();
-
-					expect(this.props).to.have.property('no');
-					expect(this.props.no).not.to.be.ok();
-
-					expect(this.props).to.have.property('obj');
-					expect(this.props.obj).to.eql(complex);
-
-					expect(this.props).to.have.property('withLongName');
-					expect(this.props.withLongName).to.be('foo');
-					done();
-				} catch (e) {
-					done(e);
-				}
-			}
-		});
-
-		var el = document.createElement('data-gremlin-2');
-		el.setAttribute('string', 'foo');
-		el.setAttribute('number', '42');
-		el.setAttribute('yes', 'true');
-		el.setAttribute('no', 'false');
-		el.setAttribute('obj', JSON.stringify(complex));
-		el.setAttribute('with-long-name', 'foo');
-		document.body.appendChild(el);
-	})
-
-});
-
-},{"../../lib/index":1,"gremlins":9}]},{},[12]);
+},{}]},{},[2]);
